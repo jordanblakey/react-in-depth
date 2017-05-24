@@ -1,0 +1,301 @@
+<html>
+  <head>
+    <title>React.js in Depth</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
+    <script src=""></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="jumbotron"></div>
+        </div>
+      </div>
+    </div>
+    <script type="text/babel">
+      var Jumbotron = React.createClass({
+        propTypes: {
+          title: React.PropTypes.string.isRequired
+        },
+
+        getDefaultProps(){
+          return {
+            // title: false,
+            title: "Hello World",
+            text: "This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.",
+          }
+        },
+
+        render: function(){
+          return(
+            <div>
+              <div className="jumbotron">
+                <h1>{this.props.title}</h1>
+                <p>{this.props.text}</p>
+                <p>
+                  <a href="#" onClick={this.onClick.bind(this, 'Hello', 'Goodbye')} className="btn btn-primary btn-lg" role="button">Learn more</a>
+                </p>
+              </div>
+            </div>
+          )
+        },
+
+        onClick: function(greeting, greeting2) {
+          alert(greeting2);
+        }
+      });
+
+      ReactDOM.render(
+        <Jumbotron />,
+        document.getElementById('jumbotron')
+      );
+    </script>
+
+    <h2>React Events</h2>
+
+
+    <h3>Clipboard Events</h3>
+
+    <p>Event Names</p>
+    <ul>
+      <li>onCopy</li>
+      <li>onCut</li>
+      <li>onPaste</li>
+    </ul>
+
+    <p>Properties</p>
+    <ul>
+      <li>DOMDataTransfer</li>
+      <li>clipboardData</li>
+    </ul>
+
+
+    <h3>Composition Events</h3>
+
+    <p>Event Names</p>
+    <ul>
+      <li>onCompositionEnd</li>
+    </ul>
+
+    <p>Properties</p>
+    <ul>
+      <li>string</li>
+      <li>data</li>
+    </ul>
+
+
+    <h3>Keyboard Events</h3>
+
+    <p>Event names:</p>
+    <ul>
+      <li>onKeyDown</li>
+      <li>onKeyPress</li>
+      <li>onKeyUp</li>
+    </ul>
+
+    <p>Properties</p>
+    <ul>
+      <li>boolean altKey</li>
+      <li>number charCode</li>
+      <li>boolean ctrlKey</li>
+      <li>boolean getModifierState(key)</li>
+      <li>string key</li>
+      <li>number keyCode</li>
+      <li>string locale</li>
+      <li>number location</li>
+      <li>boolean metaKey</li>
+      <li>boolean repeat</li>
+      <li>boolean shiftKey</li>
+      <li>number which</li>
+    </ul>
+
+
+    <h3>Focus Events</h3>
+
+    <p>Event names:</p>
+    <ul>
+      <li>onFocus</li>
+      <li>onBlur</li>
+    </ul>
+
+    <p>Properties:</p>
+    <ul>
+      <li>DOMEventTarget</li>
+      <li>relatedTarget</li>
+    </ul>
+
+
+    <h3>Form Events</h3>
+
+    <p>Event Names</p>
+    <ul>
+      <li>onChange</li>
+      <li>onInput</li>
+      <li>onSubmit</li>
+    </ul>
+
+
+    <h3>Mouse Events</h3>
+
+    <p>Event Names</p>
+    <ul>
+      <li>onClick</li>
+      <li>onContextMenu</li>
+      <li>onDoubleClick</li>
+      <li>onDrag</li>
+      <li>onDragEnd</li>
+      <li>onDragEnter</li>
+      <li>onDragExit</li>
+      <li>onDragLeave</li>
+      <li>onDragOver</li>
+      <li>onDragStart</li>
+      <li>onDrop</li>
+      <li>onMouseDown</li>
+      <li>onMouseEnter</li>
+      <li>onMouseLeave</li>
+      <li>onMouseMove</li>
+      <li>onMouseOut</li>
+      <li>onMouseOver</li>
+      <li>onMouseUp</li>
+    </ul>
+
+    <p>Properties</p>
+    <ul>
+      <li>boolean altKey</li>
+      <li>number button</li>
+      <li>number buttons</li>
+      <li>number clientX</li>
+      <li>number clientY</li>
+      <li>boolean ctrlKey</li>
+      <li>boolean getModifierState(key)</li>
+      <li>boolean metaKey</li>
+      <li>number pageX</li>
+      <li>number pageY</li>
+      <li>DomEventTarget relatedTarget</li>
+      <li>number screenX</li>
+      <li>number screenY</li>
+      <li>boolean shiftKey</li>
+    </ul>
+
+
+    <h3>Selection Events</h3>
+      <p>Event Names</p>
+      <ul>
+        <li>onSelect</li>
+      </ul>
+
+
+    <h3>Touch Events</h3>
+      <p>Event Names</p>
+      <ul>
+        <li>onTouchCancel</li>
+        <li>onTouchEnd</li>
+        <li>onTouchMove</li>
+        <li>onTouchStart</li>
+      </ul>
+
+      <p>Properties</p>
+      <ul>
+        <li>boolean altkey</li>
+        <li>DOMTouchList changedTouches</li>
+        <li>boolean ctrlKey</li>
+        <li>boolean getModifierState(key)</li>
+        <li>boolean metaKey</li>
+        <li>boolean shiftKey</li>
+        <li>DOMTouchList targetTouches</li>
+        <li>DOMTouchList touches</li>
+      </ul>
+
+
+    <h3>Wheel Events</h3>
+    <p>Event names:</p>
+      <ul>
+        <li>onWheel</li>
+      </ul>
+
+    <p>Properties:</p>
+    <ul>
+      <li>number deltaMode</li>
+      <li>number deltaX</li>
+      <li>number deltaY</li>
+      <li>number deltaZ</li>
+    </ul>
+
+
+    <h3>Media Events</h3>
+    <p>Event names</p>
+    <ul>
+      <li>onAbort</li>
+      <li>onCanPlay</li>
+      <li>onCanPlayThrough</li>
+      <li>onDurationChange</li>
+      <li>onEmptied</li>
+      <li>onEncrypted</li>
+      <li>onEnded</li>
+      <li>onError</li>
+      <li>onLoadedData</li>
+      <li>onLoadedMetadata</li>
+      <li>onLoadStart</li>
+      <li>onPause</li>
+      <li>onPlay</li>
+      <li>onPlaying</li>
+      <li>onProgress</li>
+      <li>onRateChange</li>
+      <li>onSeeked</li>
+      <li>onSeeking</li>
+      <li>onStalled</li>
+      <li>onSuspend</li>
+      <li>onTimeUpdate</li>
+      <li>onVolumeChange</li>
+      <li>onWaiting</li>
+    </ul>
+
+
+    <h3>Image Events</h3>
+    <p>Event Names</p>
+    <ul>
+      <li>onLoad</li>
+      <li>onError</li>
+    </ul>
+
+
+    <h3>Animation Events</h3>
+    <p>Event Names</p>
+    <ul>
+      <li>onAnimationStart</li>
+      <li>onAnimationEnd</li>
+      <li>onAnimationIteration</li>
+    </ul>
+
+
+    <h3>Transition Events</h3>
+    <p>Event Names</p>
+    <ul>
+      <li>onTransitionEnd</li>
+    </ul>
+
+    <p>Propeties</p>
+    <ul>
+      <li>string animationName</li>
+      <li>string psuedoElement</li>
+      <li>float elapsedTime</li>
+    </ul>
+
+
+    <h3>Transition Events</h3>
+    <p>Event Names</p>
+    <ul>
+      <li>onTransitionEnd</li>
+    </ul>
+
+    <p>Properties</p>
+    <ul>
+      <li>string propertyName</li>
+      <li>string psuedoElement</li>
+      <li>float elapsedTime</li>
+    </ul>
+
+  </body>
+</html>
