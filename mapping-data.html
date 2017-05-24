@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>React.js in Depth</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.25/browser.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="app"></div>
+        </div>
+      </div>
+    </div>
+    <script type="text/babel">
+      var App = React.createClass({
+        getInitialState: function(){
+          return{
+            text: '',
+            todos: [
+              {
+                id: 1,
+                name: 'Meeting At Work'
+              },
+              {
+                id: 2,
+                name: 'Bring Kids to School'
+              },
+              {
+                id: 3,
+                name: 'Food Shopping'
+              }
+            ]
+          }
+        },
+
+        render:function(){
+          return(
+            <div>
+              <TodoForm />
+              <TodoList todos={this.state.todos} />
+            </div>
+          )
+        }
+      });
+
+      var TodoForm = React.createClass({
+        render: function(){
+          return(
+            <div>
+              TODOFORM
+            </div>
+          )
+        }
+      });
+
+      var TodoList = React.createClass({
+        render: function(){
+          return(
+            <ul className="list-group">
+              {
+                this.props.todos.map(todo => {
+                  return <li className="list-group-item" todo={todo} key={todo.id}>{todo.name}</li>
+                })
+              }
+            </ul>
+          )
+        }
+      });
+
+      ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+      );
+
+    </script>
+  </body>
+</html>
