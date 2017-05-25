@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <title>React.js in Depth</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.25/browser.min.js"></script>
+    <style>
+      body {
+        margin-top: 2rem;
+      }
+
+      a.delete {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="app"></div>
+        </div>
+      </div>
+    </div>
+    <script type="text/babel">
+      var App = React.createClass({
+        getInitialState: function(){
+          return{
+            text: '',
+            todos: [
+              {
+                id: 1,
+                text: 'Meeting At Work'
+              },
+              {
+                id: 2,
+                text: 'Bring Kids to School'
+              },
+              {
+                id: 3,
+                text: 'Food Shopping'
+              }
+            ]
+          }
+        },
+
+        render:function(){
+          return(
+            <div>
+              <TodoForm ontodoAdd={this.handleTodoAdd} />
+              <TodoList todos={this.state.todos} deleteTodo={this.handleTodoDelete} />
+            </div>
+           )
+        },
+
+        handleTodoAdd: function(text){
+          var newTodo = {
+            id: this.state.todos.length + 1,
+            text: text
+          }
+
+          this.setState({todos: this.state.todos.concat(newTodo)});
+        },
+
+        handleTodoDelete: function(todo){
+          var todos = this.state.todos;
+          for(var i = 0; i < todos.length; i++){
+            if(todos[i].id == todo.id){
+              todos.splice(i,1);
+            }
+
+            this.setState({todos: todos});
+          }
+        }
+      });
+
+      var TodoForm = React.createClass({
+        render: function(){
+          return(
+            <div>
+              <form onSubmit={this.onSubmit}>
+                <div className="form-group">
+                  <label>Todo text</label>
+                  <input type="text" ref="text" onChange={this.onChange} className="form-control" />
+                </div>
+              </form>
+            </div>
+          )
+        },
+
+        onChange(){
+          console.log('Changing text')
+        },
+
+        onSubmit: function(e){
+          e.preventDefault();
+          var text = this.refs.text.value.trim();
+          if(!text){
+            alert('Please enter a todo');
+            return;
+          }
+
+          this.props.ontodoAdd(text)
+          this.refs.text.value= '';
+        }
+      });
+
+      var TodoList = React.createClass({
+        render: function(){
+          return(
+            <ul className="list-group">
+              {
+                this.props.todos.map(todo => {
+                  return <li className="list-group-item" todo={todo} key={todo.id}>{todo.text} <a onClick={this.onDelete.bind(this, todo)} className="delete" href="#">x</a></li>
+                })
+              }
+            </ul>
+          )
+        },
+
+        onDelete(todo){
+          console.log('Deleted: ' + todo.text)
+          this.props.deleteTodo(todo);
+        }
+      });
+
+      ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+      );
+
+    </script>
+  </body>
+</html>
