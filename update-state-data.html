@@ -50,9 +50,13 @@
           return(
             <div>
               <TodoForm
-                {...this.states}
-                ontodoAdd={this.handleTodoAdd} />
-              <TodoList todos={this.state.todos}
+                {...this.state}
+                changeText={this.handleChangeText}
+                ontodoAdd={this.handleTodoAdd}
+                onTodoUpdate={this.handleTodoUpdate} />
+              <TodoList
+                // todos={this.state.todos}
+                {...this.state}
                 deleteTodo={this.handleTodoDelete}
                 editTodo={this.handleTodoEdit} />
             </div>
@@ -84,6 +88,22 @@
             text: todo.text,
             isEdit: todo.id
           });
+        },
+
+        handleChangeText: function(text){
+          this.setState({text: text});
+        },
+
+        handleTodoUpdate: function(todo){
+          var todos = this.state.todos;
+          for(var i = 0; i < todos.length; i++){
+            if(todos[i].id == todo.id){
+              todos.splice(i, 1);
+            }
+
+            todos.push(todo);
+            this.setState({todos: todos});
+          }
         }
 
       });
@@ -102,8 +122,8 @@
           )
         },
 
-        onChange(){
-          console.log('Changing text')
+        onChange(e){
+          this.props.changeText(e.target.value);
         },
 
         onSubmit: function(e){
@@ -114,7 +134,17 @@
             return;
           }
 
-          this.props.ontodoAdd(text)
+          if(this.props.isEdit){
+            var updatedTodo = {
+              id: this.props.isEdit,
+              text: text
+            }
+
+            this.props.onTodoUpdate(updatedTodo);
+          } else {
+            this.props.ontodoAdd(text)
+          }
+
           this.refs.text.value= '';
         }
       });
